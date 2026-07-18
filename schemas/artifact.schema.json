@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://biblia.dev/schemas/artifact.schema.json",
+  "title": "BIBLIA Knowledge Artifact",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "title",
+    "status",
+    "version",
+    "created",
+    "updated",
+    "source",
+    "content"
+  ],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "type": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "status": {
+      "type": "string",
+      "enum": ["candidate", "draft", "review", "approved", "active", "superseded", "archived"]
+    },
+    "version": {"type": "string", "minLength": 1},
+    "author": {"type": ["string", "null"]},
+    "created": {"type": "string", "format": "date"},
+    "updated": {"type": "string", "format": "date"},
+    "source": {"type": "string", "minLength": 1},
+    "rationale": {"type": ["string", "null"]},
+    "tags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "target"],
+        "properties": {
+          "type": {"type": "string"},
+          "target": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "content": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": false
+}
